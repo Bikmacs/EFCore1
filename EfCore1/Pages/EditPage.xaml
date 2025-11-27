@@ -1,0 +1,72 @@
+﻿<Page x:Class="EfCore1.Pages.EditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EfCore1.Pages"
+      xmlns:validators="clr-namespace:EfCore1.ValidationRules"
+      mc:Ignorable="d" 
+      HorizontalAlignment="Center"
+      Title="EditPage">
+
+    <Grid>
+        <StackPanel Margin="20" MaxWidth="400" HorizontalAlignment="Left">
+            <TextBlock Text="Данные пользователя" FontSize="20" FontWeight="Bold" Margin="0,0,0,15"/>
+
+            <Label Content="Логин (мин. 5 символов):"/>
+            <StackPanel>
+                <TextBox x:Name="xLogin">
+                    <TextBox.Text>
+                        <Binding Path="Login" UpdateSourceTrigger="PropertyChanged" >
+                            <Binding.ValidationRules>
+                                <validators:Login/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <ItemsControl ItemsSource="{Binding ElementName=xLogin, Path=(Validation.Errors)}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ErrorContent}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <StackPanel Margin="0,5">
+                <Label Content="Имя"/>
+                <TextBox x:Name="tbName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+         
+
+            <Label Content="Email:"/>
+            <StackPanel>
+                <TextBox x:Name="xEmail">
+                    <TextBox.Text>
+                        <Binding Path="Email" UpdateSourceTrigger="PropertyChanged" >
+                            <Binding.ValidationRules>
+                                <validators:EmailRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <ItemsControl ItemsSource="{Binding ElementName=xEmail, Path=(Validation.Errors)}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ErrorContent}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+           
+
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Button Content="Сохранить" Width="100" Click="Save_Click" Background="#DDDDFF"/>
+                <Button Content="Назад" Width="100" Margin="10,0,0,0" Click="Back_Click"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Page>
