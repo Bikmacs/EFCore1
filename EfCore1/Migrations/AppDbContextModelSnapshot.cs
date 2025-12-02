@@ -37,23 +37,6 @@ namespace EfCore1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Title = "Пользователь"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Title = "Менеджер"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Title = "Администратор"
-                        });
                 });
 
             modelBuilder.Entity("EfCore1.models.User", b =>

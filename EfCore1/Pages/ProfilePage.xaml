@@ -1,0 +1,51 @@
+﻿<Page x:Class="EfCore1.Pages.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EfCore1.Pages"
+      xmlns:validators="clr-namespace:EfCore1.ValidationRules"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="250"
+      Title="ProfilePage">
+
+    <Grid>
+        <StackPanel Margin="20" MaxWidth="400" HorizontalAlignment="Left">
+            <TextBlock Text="Данные профиля" FontSize="20" FontWeight="Bold" Margin="0,0,0,15"/>
+
+            <Label Content="Фото профиля:"/>
+            <StackPanel>
+                <TextBox Text="{Binding AvatarUrl, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,5">
+                <Label Content="Имя"/>
+                <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,5">
+                <Label Content="Date"/>
+                <DatePicker x:Name="Date">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="CreateAt" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validators:DateRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+            </StackPanel>
+
+            <StackPanel Margin="0,5">
+                <Label Content="Биография:"/>
+                <TextBox Text="{Binding Bio, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Button Content="Сохранить" Width="100" Click="Save_Click" Background="#DDDDFF"/>
+                <Button Content="Назад" Width="100" Margin="10,0,0,0" Click="Back_Click"/>
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</Page>

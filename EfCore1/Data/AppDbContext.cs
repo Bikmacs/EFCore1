@@ -32,13 +32,6 @@ namespace EfCore1.Data
                 .HasMany(g => g.Users)
                 .WithOne(s => s.Role)
                 .HasForeignKey(s => s.RoleId);
-
-            modelBuilder.Entity<Role>().HasData(
-                new Role { Id = 1, Title = "Пользователь" },
-                new Role { Id = 2, Title = "Менеджер" },
-                new Role { Id = 3, Title = "Администратор" }
-            );
-
         }
     }
 }

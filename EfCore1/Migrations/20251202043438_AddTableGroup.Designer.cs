@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfCore1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251201175720_role")]
-    partial class role
+    [Migration("20251202043438_AddTableGroup")]
+    partial class AddTableGroup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,23 +40,6 @@ namespace EfCore1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Title = "Пользователь"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Title = "Менеджер"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Title = "Администратор"
-                        });
                 });
 
             modelBuilder.Entity("EfCore1.models.User", b =>

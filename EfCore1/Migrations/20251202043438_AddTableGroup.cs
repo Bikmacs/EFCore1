@@ -6,11 +6,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EfCore1.Migrations
 {
     /// <inheritdoc />
-    public partial class AddBd : Migration
+    public partial class AddTableGroup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
@@ -35,7 +36,7 @@ namespace EfCore1.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
+                    RoleId = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
                 },
                 constraints: table =>
                 {
@@ -70,6 +71,17 @@ namespace EfCore1.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+
+            migrationBuilder.InsertData(
+               table: "Roles",
+               columns: new[] { "Id", "Title" },
+               values: new object[,]
+               {
+                    { 1, "Пользователь" },
+                    { 2, "Менеджер" },
+                    { 3, "Администратор" }
+               });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_UserId",

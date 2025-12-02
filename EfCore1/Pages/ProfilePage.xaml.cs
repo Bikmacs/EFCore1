@@ -18,42 +18,37 @@ using System.Windows.Shapes;
 namespace EfCore1.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для EditPage.xaml
+    /// Логика взаимодействия для ProfilePage.xaml
     /// </summary>
-    public partial class EditPage : Page
+    public partial class ProfilePage : Page
     {
-        private readonly UserService _userService = new();
-        private User? _user;
+        private readonly ProfileService _profileService = new();
+        private UserProfile? _userProfile;
 
-        public EditPage()
+        public ProfilePage()
         {
             InitializeComponent();
         }
 
-        public EditPage(User user) 
+        public ProfilePage(UserProfile userProfile)
         {
             InitializeComponent();
-            _user = user;
-            DataContext = _user;
+            _userProfile = userProfile;
+            DataContext = _userProfile;
 
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (_user != null)
+            if (_userProfile != null)
             {
-                _userService.UpdateUser(_user);
+                _profileService.UpdateUser(_userProfile);
             }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
-        }
-
-        private void EditProfile(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ProfilePage());
         }
     }
 }

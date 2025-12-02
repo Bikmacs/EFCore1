@@ -65,6 +65,7 @@
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                 <Button Content="Сохранить" Width="100" Click="Save_Click" Background="#DDDDFF"/>
                 <Button Content="Назад" Width="100" Margin="10,0,0,0" Click="Back_Click"/>
+                <Button  Content="Профиль" Margin="10,0,0,0" Click="EditProfile"/>
             </StackPanel>
 
         </StackPanel>

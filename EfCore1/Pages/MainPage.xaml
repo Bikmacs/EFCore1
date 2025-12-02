@@ -44,6 +44,10 @@
                             <TextBlock Text="Дата создания: "/>
                             <TextBlock Text="{Binding CreateAt}"/>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Роль: "/>
+                            <TextBlock Text="{Binding Role.Title}"/>
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

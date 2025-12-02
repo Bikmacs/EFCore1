@@ -58,7 +58,7 @@ namespace EfCore1.models
             set => SetProperty(ref _userProfile, value);
         }
 
-        private int _roleId;
+        private int _roleId = 1;
         public int RoleId
         {
             get => _roleId;

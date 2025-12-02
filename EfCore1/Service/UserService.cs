@@ -1,5 +1,6 @@
 ﻿using EfCore1.Data;
 using EfCore1.models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,15 +24,31 @@ namespace EfCore1.Service
 
         public void GetAll()
         {
-            var users = _db.Users.ToList();
+            var users = _db.Users
+                .Include(s => s.UserProfile)
+                .Include(s => s.Role)
+                .ToList();
+
             Users.Clear();
+
             foreach (var u in users) Users.Add(u);
         }
 
         public void Add(User user)
         {
-            user.CreateAt = DateTime.Now;
-            _db.Users.Add(user);
+            var _user = new User
+            {
+                Id = user.Id,
+                Login = user.Login,
+                Name = user.Name,
+                Email = user.Email,
+                Password = user.Password,
+                CreateAt = user.CreateAt.Date,
+                RoleId = user.RoleId,
+                Role = user.Role,
+            };
+          
+            _db.Users.Add(_user);
             _db.SaveChanges();
             Users.Add(user);
         }
