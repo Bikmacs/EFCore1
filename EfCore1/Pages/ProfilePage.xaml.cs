@@ -42,7 +42,16 @@ namespace EfCore1.Pages
         {
             if (_userProfile != null)
             {
-                _profileService.UpdateUser(_userProfile);
+                if (_userProfile.Id == 0)
+                {
+                    _profileService.Add(_userProfile);
+                }
+                else
+                {
+                    _profileService.UpdateUser(_userProfile);
+                }
+
+                NavigationService.GoBack();
             }
         }
 

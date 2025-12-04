@@ -48,6 +48,9 @@ namespace EfCore1.Pages
             }
         }
 
-   
+        private void Button_Role(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new RolePage());
+        }
     }
 }

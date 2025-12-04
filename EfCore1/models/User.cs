@@ -37,7 +37,6 @@ namespace EfCore1.models
         }
 
         private string _password;
-
         public string Password
         {
             get => _password;
@@ -58,7 +57,7 @@ namespace EfCore1.models
             set => SetProperty(ref _userProfile, value);
         }
 
-        private int _roleId = 1;
+        private int _roleId;
         public int RoleId
         {
             get => _roleId;

@@ -53,7 +53,20 @@ namespace EfCore1.Pages
 
         private void EditProfile(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ProfilePage());
+            if (_user == null) return;
+            if (_user.UserProfile == null)
+            {
+                var newProfile = new UserProfile
+                {
+                    UserId = _user.Id  
+                };
+
+                NavigationService.Navigate(new ProfilePage(newProfile));
+            }
+            else
+            {
+                NavigationService.Navigate(new ProfilePage(_user.UserProfile));
+            }
         }
     }
 }

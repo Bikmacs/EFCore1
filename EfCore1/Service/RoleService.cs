@@ -1,5 +1,6 @@
 ﻿using EfCore1.Data;
 using EfCore1.models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,6 +46,13 @@ namespace EfCore1.Service
             Roles.Add(_userRole);
         }
 
+        public Role? GetRoleByName(string title)
+        {
+            return _db.Roles
+                .Include(r => r.Users) 
+                .FirstOrDefault(r => r.Title == title);
+        }
+
         public void Remove(Role role)
         {
             _db.Remove<Role>(role);
@@ -57,7 +65,7 @@ namespace EfCore1.Service
         {
             var entry = _db.Entry(role);
             var navigation = entry.Metadata.FindNavigation(relation)
-            ?? throw new InvalidOperationException($"Navigation '{relation}' notfound");
+            ?? throw new InvalidOperationException($"Navigation '{relation}' not found");
             if (navigation.IsCollection)
             {
                 entry.Collection(relation).Load();

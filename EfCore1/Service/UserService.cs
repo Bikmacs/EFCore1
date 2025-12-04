@@ -25,8 +25,8 @@ namespace EfCore1.Service
         public void GetAll()
         {
             var users = _db.Users
-                .Include(s => s.UserProfile)
                 .Include(s => s.Role)
+                .Include(s => s.UserProfile)
                 .ToList();
 
             Users.Clear();
@@ -44,8 +44,8 @@ namespace EfCore1.Service
                 Email = user.Email,
                 Password = user.Password,
                 CreateAt = user.CreateAt.Date,
-                RoleId = user.RoleId,
-                Role = user.Role,
+                RoleId = 1,
+                Role = user.Role
             };
           
             _db.Users.Add(_user);

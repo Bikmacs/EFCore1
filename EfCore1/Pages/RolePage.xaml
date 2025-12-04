@@ -16,21 +16,22 @@
         <StackPanel>
             <StackPanel>
                 <Label>Название группы</Label>
-                <TextBox Text="{Binding Title}"/>
+                <TextBox x:Name="Find" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged"/>
             </StackPanel>
             <StackPanel>
-                <Button Click="save">Сохранить</Button>
-                <Button Click="back">Назад</Button>
+                <Button Click="save" Margin="5">Сохранить</Button>
+                <Button Click="back" Margin="5">Назад</Button>
             </StackPanel>
         </StackPanel>
 
-        <ListView Grid.Column="1" ItemsSource="{Binding User}">
+        <ListView Grid.Column="1" 
+                  ItemsSource="{Binding Users}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
-                         <Run Text="Имя "/>
-                         <Run Text="{Binding Name} "/>
-                         <Run Text="Email "/>
+                         <Run Text="Имя:"/>
+                         <Run Text="{Binding Name}"/>
+                         <Run Text="Email:"/>
                          <Run Text="{Binding Email}"/>
                     </TextBlock>
                 </DataTemplate>

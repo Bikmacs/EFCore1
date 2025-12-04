@@ -23,7 +23,7 @@ namespace EfCore1.models
             set => SetProperty(ref _title, value);
         }
 
-        private ObservableCollection<User> _users;
+        private ObservableCollection<User> _users = new();
         public ObservableCollection<User> Users
         {
             get => _users;

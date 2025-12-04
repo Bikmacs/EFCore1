@@ -19,15 +19,15 @@
             </StackPanel>
 
             <StackPanel Margin="0,5">
-                <Label Content="Имя"/>
+                <Label Content="Телефон"/>
                 <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <StackPanel Margin="0,5">
-                <Label Content="Date"/>
+                <Label Content="Birthday"/>
                 <DatePicker x:Name="Date">
                     <DatePicker.SelectedDate>
-                        <Binding Path="CreateAt" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding Path="Birthday" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
                                 <validators:DateRule/>
                             </Binding.ValidationRules>

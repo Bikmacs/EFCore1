@@ -16,14 +16,15 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#F0F0F0">
-            <Button  Content="Добавить" Click="Button_Click"/>
-            <Button  Content="Удалить" Click="Button_Click_1"/>
+            <Button  Content="Добавить" Click="Button_Click" Margin="5"/>
+            <Button  Content="Удалить" Click="Button_Click_1" Margin="5"/>
+            <Button  Content="Поиск по ролям" Click="Button_Role" Margin="5"/>
         </StackPanel>
 
         <ListView Grid.Row="1" 
                   x:Name="UserListView"
                   ItemsSource="{Binding service.Users}"
-                  SelectedItem="{Binding SelectedUser}"
+                  SelectedItem="{Binding selectedUser}"
                    MouseDoubleClick="EditItem_Click">
             <ListView.ItemTemplate>
                 <DataTemplate>

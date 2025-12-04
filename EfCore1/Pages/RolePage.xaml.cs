@@ -2,6 +2,7 @@
 using EfCore1.Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,13 +24,14 @@ namespace EfCore1.Pages
     /// </summary>
     public partial class RolePage : Page
     {
-        Role _role = new Role();
+        Role _role = new();
         RoleService service = new();
         bool IsEdit = false;
 
         public RolePage(Role? role = null)
         {
             InitializeComponent();
+            if (_role.Users == null) _role.Users = new ObservableCollection<User>();
 
             if (role != null)
             {
@@ -42,11 +44,11 @@ namespace EfCore1.Pages
 
         private void save(object sender, RoutedEventArgs e)
         {
-            if (IsEdit)
-                service.Commit();
-            else
-                service.Add(_role);
-            back(sender, e);
+            //if (IsEdit)
+            //    service.Commit();
+            //else
+            //    service.Add(_role);
+            //back(sender, e);
         }
 
         private void back(object sender, RoutedEventArgs e)
@@ -54,6 +56,27 @@ namespace EfCore1.Pages
             NavigationService.GoBack();
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string currentTitle = Find.Text;
 
+            var foundRole = service.GetRoleByName(currentTitle);
+
+            if (foundRole == null)
+            {
+                _role.Users.Clear();
+                return;
+            }
+
+            _role.Users.Clear();
+
+            if (foundRole != null && foundRole.Users != null)
+            {
+                foreach (var user in foundRole.Users)
+                {
+                    _role.Users.Add(user);
+                }
+            }
+        }
     }
 }
