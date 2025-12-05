@@ -36,8 +36,12 @@ namespace EfCore1.Pages
 
         private void Button_Remove_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = UserListView.SelectedItems as InterestGroup;
-            service.Remove(selectedIndex);
+            var selectedItem = UserListView.SelectedItem as InterestGroup;
+            if (selectedItem != null) service.Remove(selectedItem);
+            else
+            {
+                MessageBox.Show("NULL");
+            }
         }
 
         private void Button_Back(object sender, RoutedEventArgs e)

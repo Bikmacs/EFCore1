@@ -43,8 +43,8 @@ namespace EfCore1.models
             set => SetProperty(ref _title, value);
         }
 
-        private DateOnly _joinedAt = DateOnly.FromDateTime(DateTime.Now);
-        public DateOnly JoinedAt
+        private DateTime _joinedAt = DateTime.Now;
+        public DateTime JoinedAt
         {
             get => _joinedAt;
             set => SetProperty(ref _joinedAt, value);

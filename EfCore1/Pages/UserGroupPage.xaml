@@ -22,7 +22,7 @@
 
             <StackPanel Margin="0,0,0,15">
                 <TextBlock Text="{Binding User.Name}" FontSize="16"/>
-                <TextBlock Text="{Binding User.Email}" FontSize="14" Foreground="Gray"/>
+                <TextBlock Text="{Binding User.Email}" FontSize="14"/>
             </StackPanel>
 
             <StackPanel Margin="0,0,0,15">
@@ -34,15 +34,8 @@
 
             <StackPanel Margin="0,0,0,20">
                 <Label Content="Дата вступления:"/>
-                <DatePicker x:Name="Date">
-                    <DatePicker.SelectedDate>
-                        <Binding Path="UserGroup.JoinedAt" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
-                            <Binding.ValidationRules>
-                                <validators:DateRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DatePicker.SelectedDate>
-                </DatePicker>
+                <DatePicker x:Name="Date" SelectedDate="{Binding UserGroup.JoinedAt, UpdateSourceTrigger=PropertyChanged}" />
+
             </StackPanel>
 
             <Button Content="Вступить в группу" Click="Save_Click" Height="30" />
