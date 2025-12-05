@@ -21,6 +21,7 @@ namespace EfCore1.Pages
     public partial class MainPage : Page
     {
         public UserService service { get; set; } = new();
+        public UserInterestGroup serviceGroup { get; set; } = new();
         public MainPage()
         {
             InitializeComponent();
@@ -51,6 +52,20 @@ namespace EfCore1.Pages
         private void Button_Role(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RolePage());
+        }
+
+        private void Button_Groups(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new GroupsPage());
+        }
+
+        private void Button_AddUser_Group(object sender, RoutedEventArgs e)
+        {
+            var selectedUser = UserListView.SelectedItem as User;
+            if (selectedUser != null)
+            {
+                NavigationService.Navigate(new UserGroupPage(selectedUser));
+            }
         }
     }
 }

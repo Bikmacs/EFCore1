@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +70,13 @@ namespace EfCore1.models
         {
             get => _role;
             set => SetProperty(ref _role, value);
+        }
+
+        private ObservableCollection<UserInterestGroup> _userGroup;
+        public ObservableCollection<UserInterestGroup> UserGroup
+        {
+            get => _userGroup;
+            set => SetProperty(ref _userGroup, value);
         }
     }
 }

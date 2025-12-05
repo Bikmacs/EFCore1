@@ -1,0 +1,65 @@
+﻿<Page x:Class="EfCore1.Pages.UserGroupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EfCore1.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:validators="clr-namespace:EfCore1.ValidationRules"
+      Title="UserGroupPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="10">
+            <Button Content="Назад" Width="100" Click="Back_Click" HorizontalAlignment="Left" Margin="0,0,0,20"/>
+
+            <TextBlock Text="Информация о пользователе" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+            <StackPanel Margin="0,0,0,15">
+                <TextBlock Text="{Binding User.Name}" FontSize="16"/>
+                <TextBlock Text="{Binding User.Email}" FontSize="14" Foreground="Gray"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="Роль в группе:"/>
+                <CheckBox Content="Является модератором" 
+                          IsChecked="{Binding UserGroup.IsModerator}"
+                          Margin="5"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,20">
+                <Label Content="Дата вступления:"/>
+                <DatePicker x:Name="Date">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="UserGroup.JoinedAt" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <validators:DateRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+            </StackPanel>
+
+            <Button Content="Вступить в группу" Click="Save_Click" Height="30" />
+        </StackPanel>
+
+        <Grid Grid.Column="1">
+            <ListView x:Name="GroupListView" 
+                      ItemsSource="{Binding Service.Group}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontSize="12"/>
+                            </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

@@ -15,6 +15,9 @@ namespace EfCore1.Data
         public DbSet<User> Users { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<InterestGroup> Groups { get; set; }
+        public DbSet<UserInterestGroup> UserGroup { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,6 +35,20 @@ namespace EfCore1.Data
                 .HasMany(g => g.Users)
                 .WithOne(s => s.Role)
                 .HasForeignKey(s => s.RoleId);
+
+             modelBuilder.Entity<UserInterestGroup>()
+                .HasKey(cs => new { cs.UserId, cs.InterestGroupId });
+
+            modelBuilder.Entity<UserInterestGroup>()
+               .HasOne(ug => ug.User)
+               .WithMany(u => u.UserGroup) 
+               .HasForeignKey(ug => ug.UserId);
+
+            modelBuilder.Entity<UserInterestGroup>()
+                 .HasOne(cs => cs.InterestGroup)
+                 .WithMany(c => c.UserGroup)
+                 .HasForeignKey(cs => cs.InterestGroupId);
+
         }
     }
 }

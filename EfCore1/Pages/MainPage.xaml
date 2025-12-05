@@ -14,18 +14,22 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#F0F0F0">
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="#F0F0F0">
             <Button  Content="Добавить" Click="Button_Click" Margin="5"/>
             <Button  Content="Удалить" Click="Button_Click_1" Margin="5"/>
             <Button  Content="Поиск по ролям" Click="Button_Role" Margin="5"/>
+            <Button  Content="Группы" Click="Button_Groups" Margin="5"/>
+            <Button  Content="Вступить в группу" Click="Button_AddUser_Group" Margin="5"/>
         </StackPanel>
 
         <ListView Grid.Row="1" 
                   x:Name="UserListView"
-                  ItemsSource="{Binding service.Users}"
-                  SelectedItem="{Binding selectedUser}"
-                   MouseDoubleClick="EditItem_Click">
+                  ItemsSource="{Binding service.Users}"                    MouseDoubleClick="EditItem_Click">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -48,6 +52,28 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Роль: "/>
                             <TextBlock Text="{Binding Role.Title}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView Grid.Row="1" Grid.Column="1" x:Name="UserGroupsList"
+          ItemsSource="{Binding ElementName=UserListView, Path=SelectedItem.UserGroup}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Группа: " FontWeight="Bold"/>
+                            <TextBlock Text="{Binding InterestGroup.Title}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text ="Дата вступления: "/>
+                            <TextBlock Text="{Binding JoinedAt}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Модератор: "/>
+                            <CheckBox IsChecked="{Binding IsModerator}" IsEnabled="False"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

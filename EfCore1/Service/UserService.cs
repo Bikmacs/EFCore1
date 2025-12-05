@@ -27,6 +27,8 @@ namespace EfCore1.Service
             var users = _db.Users
                 .Include(s => s.Role)
                 .Include(s => s.UserProfile)
+                .Include(u => u.UserGroup)            
+                .ThenInclude(ug => ug.InterestGroup)
                 .ToList();
 
             Users.Clear();
